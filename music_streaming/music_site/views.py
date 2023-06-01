@@ -70,8 +70,7 @@ def search_songs(request):
     }
     return render(request, 'music/search_results.html', context)
 
-#filter songs
-#TODO add filters for artist, album, year, length (for example)
+#filter songs based on genre, artist, album, year, length
 def filter_songs(request):
     genre = request.GET.get('genre')
 
@@ -80,4 +79,33 @@ def filter_songs(request):
     context = {
         'songs': songs
     }
+
+    #Filter the songs based on the selected artist
+    artist = request.GET.get('artist')
+    songs = Songs.objects.filter(artist=artist)
+    context = {
+        'songs': songs
+    }
+
+    #Filter the songs based on the selected album
+    album = request.GET.get('album')
+    songs = Songs.objects.filter(album=album)
+    context = {
+        'songs': songs
+    }
+
+    #Filter the songs based on the selected year
+    year = request.GET.get('year')
+    songs = Songs.objects.filter(year=year)
+    context = {
+        'songs': songs
+    }
+
+    #Filter the songs based on the selected length
+    length = request.GET.get('length')
+    songs = Songs.objects.filter(length=length)
+    context = {
+        'songs': songs
+    }
+
     return render(request, 'music/filtered_songs.html', context)
