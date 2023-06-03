@@ -21,7 +21,7 @@ class Playlist(models.Model):
     def __str__(self):
         return self.name
     
-class User(models.Model):
+class User(models.Model):#TODO check implementation
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
     playlists = models.ManyToManyField(Playlist)
@@ -29,7 +29,7 @@ class User(models.Model):
     def __str__(self):
         return self.username
     
-class Recommendations(models.Model):
+class Recommendations(models.Model):#FIXME
     song = models.ForeignKey(Songs, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.IntegerField()
