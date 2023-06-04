@@ -9,3 +9,4 @@ class MusicUser(AbstractUser):
 
 class Playlist(models.Model):
     name = models.CharField(max_length=50)
+    songs = models.ManyToManyField('songs.Songs')
