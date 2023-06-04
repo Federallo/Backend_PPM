@@ -8,7 +8,7 @@ class Songs(models.Model):
     genre = models.CharField(max_length=50)
     year = models.IntegerField()
     length = models.IntegerField()
-
+    #TODO maybe remove this
     def __str__(self):
         return self.title + ' - ' + self.artist
     
