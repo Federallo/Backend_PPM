@@ -10,6 +10,14 @@ class UserInterfraceView(ListView):
     def user_profile(request):
         userProfile = MusicUser.objects.all()
         return render(request, 'userProfile.html', {'user': userProfile})
+    
+class PlaylistView(ListView):
+    model = MusicUser
+    template_name = 'userProfile.html'
+
+    def playlist(request):
+        playlist_list = MusicUser.objects.all()
+        return render(request, 'userProfile.html', {'playlists': playlist_list})
         
 
 class UserCreatePlaylistView(ListView):
