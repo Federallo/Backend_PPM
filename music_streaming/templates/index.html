@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} Song List {% endblock title %}
+
+{% block content %}
+<h1>Song List</h1>
+{% for song in all_songs %}
+    <div>
+        <h2>{{ song.title }}</h2>
+        <p>{{ song.artist }}</p>
+        <p>{{ song.album }}</p>
+        <p>{{ song.genre }}</p>
+        <p>{{ song.year }}</p>
+        <p>{{ song.length }}</p>
+    </div>
+    {% empty %}
+    <p>No songs are available.</p>
+{% endfor %}
+{% endblock content %}
