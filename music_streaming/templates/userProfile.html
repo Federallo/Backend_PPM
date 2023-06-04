@@ -1,0 +1,15 @@
+{% extends 'base.html'}
+
+{% block title %} Welcome back, {{ user.name }}. {% endblock %}
+
+{% block content %}
+    <h1> Playlists: </h1>
+    {% for playlist in playlists %}<!--TODO-->
+        <h2> {{ playlist.name }} </h2>
+        {% for song in playlist.songs %}
+            <p> {{ song.name }} </p>
+        {% endfor %}
+        {% empty %}
+            <p> You haven't created a playlist yet! </p>
+    {% endfor %}
+{% endblock %}
