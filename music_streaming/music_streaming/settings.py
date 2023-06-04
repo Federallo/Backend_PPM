@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     #local apps
     'music_site',
     'songs',
+    'users',
 ]
 
 MIDDLEWARE = [
