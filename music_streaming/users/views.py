@@ -1,15 +1,25 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 from .models import MusicUser, Playlist
+from .forms import MusicUserCreationForm
 
 # Create your views here.
-class UserInterfraceView(ListView):
+class UserInterfaceView(ListView):
     model = MusicUser
     template_name = 'userProfile.html'
 
     def user_profile(request):
         userProfile = MusicUser.objects.all()
         return render(request, 'userProfile.html', {'user': userProfile})
+    
+class UserLoginView(ListView):
+    model = MusicUser
+    template_name = 'userLogin.html'
+
+    def user_login(request):
+        context = {}
+        context ['form'] = MusicUserCreationForm()
+        return render(request, 'userLogin.html', context)
     
 class UserCreateView(ListView):
     model = MusicUser
