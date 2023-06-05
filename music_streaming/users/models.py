@@ -5,7 +5,7 @@ from django.db import models
 class MusicUser(AbstractUser):
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
-    email = models.EmailField(max_length=50)
+    email = models.EmailField(("email address"), unique=True)
 
 class MsuicUserManager(BaseUserManager):
     def create_user(self, name, surname, email, password=None):

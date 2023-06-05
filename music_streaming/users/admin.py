@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError
 
 #user form
 #user creation
-class MusicUserCreationForm(forms.Modelform):
+class MusicUserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password Confirmation', widget=forms.PasswordInput)
 
@@ -30,13 +30,12 @@ class MusicUserCreationForm(forms.Modelform):
            user.save()
         return user
     
-#user update
-class MusicUserChangeForm(forms.ModelForm):
-    password = ReadOnlyPasswordHashField()
-
-    class Meta:
-        model = MusicUser
-        fields = ('name', 'surname', 'email', 'password', 'is_active', 'is_admin')
+#user update#FIXME
+#class MusicUserChangeForm(forms.ModelForm):
+#    password = ReadOnlyPasswordHashField()
+#    class Meta:
+#       model = MusicUser
+#        fields = ('name', 'surname', 'email', 'password', 'is_active', 'is_admin')
 
 # Register your models here.
 admin.site.register(MusicUser, UserAdmin)
