@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 from .models import MusicUser, Playlist
-from .forms import MusicUserCreationForm
+from .admin import MusicUserCreationForm
 
 # Create your views here.
 class UserInterfaceView(ListView):
