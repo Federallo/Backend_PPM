@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 from .models import MusicUser, Playlist
-from .admin import MusicUserCreationForm
+from .forms import MusicUserCreationForm
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 class UserInterfaceView(ListView):
@@ -17,9 +18,13 @@ class UserLoginView(ListView):
     template_name = 'userLogin.html'
 
     def user_login(request):
-        context = {}
-        context ['form'] = MusicUserCreationForm()
-        return render(request, 'userLogin.html', context)
+        if request.method == 'POST':
+            user_login = MusicUserCreationForm(data=request.POST)
+            if user_login.is_vaild():
+                return HttpResponseRedirect('/users/profile/')
+        else:
+            user_login = MusicUserCreationForm()
+        return render(request, 'userLogin.html', {'form': user_login})
     
 class UserCreateView(ListView):
     model = MusicUser
