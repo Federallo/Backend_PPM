@@ -11,7 +11,7 @@ class UserInterfraceView(ListView):
         userProfile = MusicUser.objects.all()
         return render(request, 'userProfile.html', {'user': userProfile})
     
-class PlaylistView(ListView):
+class PlaylistsView(ListView):
     model = MusicUser
     template_name = 'userProfile.html'
 
@@ -28,6 +28,6 @@ class UserDeletePlaylistView(ListView):
     model = MusicUser
     template_name = 'playlistDelete.html'
 
-class UserEditPlaylistView(ListView):
+class DetailedPlaylistView(ListView):
     model = MusicUser
-    template_name = 'playlistEdit.html'
+    template_name = 'playlistDetails.html'
