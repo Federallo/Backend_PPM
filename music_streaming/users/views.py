@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView
-from .models import MusicUser
+from .models import MusicUser, Playlist
 
 # Create your views here.
 class UserInterfraceView(ListView):
@@ -12,11 +12,11 @@ class UserInterfraceView(ListView):
         return render(request, 'userProfile.html', {'user': userProfile})
     
 class PlaylistsView(ListView):
-    model = MusicUser
+    model = Playlist
     template_name = 'userProfile.html'
 
     def playlist(request):
-        playlist_list = MusicUser.objects.all()
+        playlist_list = Playlist.objects.all()
         return render(request, 'userProfile.html', {'playlists': playlist_list})
         
 
