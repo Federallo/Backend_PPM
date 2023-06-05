@@ -28,7 +28,7 @@ class UserCreateView(ListView):
                 return HttpResponseRedirect('/users/profile/')
         else:
             user_create_form = MusicUserCreationForm()
-        return render(request, 'userCreation.html', {'form': user_create_form})
+        return render(request, 'userCreation.html', {'user_create_form': user_create_form})
     
 class PlaylistsView(ListView):
     model = Playlist
