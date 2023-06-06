@@ -17,18 +17,14 @@ class UserLoginView(ListView):
     model = MusicUser
     template_name = 'userLogin.html'
     
-class UserCreateView(ListView):
-    model = MusicUser
-    template_name = 'userCreation.html'
 
-    def user_create(request):
-        if request.method == 'POST':
-            user_create_form = MusicUserCreationForm(request.POST)
-            if user_create_form.is_vaild():
-                return HttpResponseRedirect('/users/profile/')
-        else:
-            user_create_form = MusicUserCreationForm()
-        return render(request, 'userCreation.html', {'user_create_form': user_create_form})
+def user_create_form(request):
+    if request.method == 'POST':
+        user_create_form = MusicUserCreationForm(request.POST)
+        return HttpResponseRedirect('/users/profile/')
+    else:
+        user_create_form = MusicUserCreationForm
+    return render(request, 'userCreation.html', {'user_create_form': user_create_form})
     
 class PlaylistsView(ListView):
     model = Playlist

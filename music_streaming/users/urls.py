@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import UserInterfaceView, UserLoginView, UserCreateView, PlaylistsView, UserCreatePlaylistView, UserDeletePlaylistView, DetailedPlaylistView
+from .views import user_create_form, UserInterfaceView, UserLoginView, PlaylistsView, UserCreatePlaylistView, UserDeletePlaylistView, DetailedPlaylistView
 
 urlpatterns = [
     path('login/', UserLoginView.as_view(), name='userLogin'),
-    path('create/', UserCreateView.as_view(), name='userCreate'),
+    path('create/', user_create_form, name='userCreate'),
     path('profile/', UserInterfaceView.as_view(), name='userProfile'),
-]
+] 
