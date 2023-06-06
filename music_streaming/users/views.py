@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.contrib.auth import authenticate, login
 from .models import MusicUser, Playlist
-from .forms import MusicUserCreationForm
+from .forms import MusicUserCreationForm, MusicUserLoginForm
 from django.http import HttpResponseRedirect
 
 # Create your views here.
@@ -13,10 +14,22 @@ class UserInterfaceView(ListView):
         userProfile = MusicUser.objects.all()
         return render(request, 'userProfile.html', {'user': userProfile})
     
-class UserLoginView(ListView):
-    model = MusicUser
-    template_name = 'userLogin.html'
-    
+def user_login_form(request):
+    if request.method == 'POST':
+        user_login_form = MusicUserLoginForm(request.POST)
+        email = user_login_form['email'].value()
+        password = user_login_form['password'].value()
+        user = authenticate(request, email = email, password = password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect('/users/profile/')
+        else:
+            user_login_form.add_error(None, 'Invalid email or password')
+    else:
+        user_login_form = MusicUserLoginForm
+    return render(request, 'userLogin.html', {'user_login_form': user_login_form})
+        
+
 
 def user_create_form(request):
     if request.method == 'POST':

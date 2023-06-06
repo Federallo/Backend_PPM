@@ -30,6 +30,13 @@ class MusicUserCreationForm(forms.ModelForm):
            user.save()
         return user
     
+
+class MusicUserLoginForm(forms.ModelForm):
+    class Meta:
+        model = MusicUser
+        fields = ('email', 'password')
+
+
 #user update#FIXME
 #class MusicUserChangeForm(forms.ModelForm):
 #    password = ReadOnlyPasswordHashField()

@@ -7,7 +7,7 @@
 
     <form action = "" method = "post">
         {% csrf_token %}
-        {{ login_form.as_p }}<!--TODO add form for login-->
+        {{ user_login_form.as_p }}<!--TODO add form for login-->
         <input type = "submit" value = "Login"/>
     </form>
 
