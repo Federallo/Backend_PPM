@@ -1,8 +1,23 @@
 from django.contrib import admin
-from .models import MusicUser
 from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import Group
+from .models import CustomUser
+from .forms import CustomUserCreationForm, CustomUserChangeForm
+
+#custom admin user
+class CustomUserAdmin(UserAdmin):
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
+    model = CustomUser
+    list_display = [
+        "username",
+        "name",
+        "email",
+        "is_staff",
+    ]
+    fieldsets = UserAdmin.fieldsets + ((None, {"fields": ("name",)}),)
+    add_fieldsets = UserAdmin.add_fieldsets + ((None, {'fields': ("name",)}),)
+
+
 
 # Register your models here.
-admin.site.register(MusicUser, UserAdmin)
-admin.site.unregister(Group)
+admin.site.register(CustomUser, CustomUserAdmin)
