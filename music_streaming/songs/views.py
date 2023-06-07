@@ -1,5 +1,5 @@
-from django.views.generic import ListView, View
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, CreateView
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Songs, Playlist
 
@@ -13,22 +13,30 @@ class SongIndexView(ListView):
         song_list = Songs.objects.all()
         return render(request, 'index.html', {'all_songs': song_list})
     
-class PlaylistView(LoginRequiredMixin, ListView):
+
+@login_required    
+class PlaylistView(ListView):
     model = Playlist
     template_name = 'playlist.html'
 
-class PlaylistDetailView(LoginRequiredMixin, View):
+class PlaylistDetailView(CreateView):
     model = Playlist
     template_name = 'playlistDetail.html'
 
-class PlaylistEditView(LoginRequiredMixin, View):
+class PlaylistEditView(CreateView):
     model = Playlist
     template_name = 'playlistEdit.html'
 
-class PlaylistDeleteView(LoginRequiredMixin, View):
+class PlaylistDeleteView(CreateView):
     model = Playlist
     template_name = 'playlistDelete.html'
 
-class PlaylistCreateView(LoginRequiredMixin, View):
+class PlaylistCreateView(CreateView):
     model = Playlist
-    template_name = 'playlistCreate.html'
+    template_name = 'playlistCreation.html'
+    fields = ('name', 'description')
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super().form_valid(form)

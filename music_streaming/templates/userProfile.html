@@ -11,7 +11,7 @@
         {% endfor %}
         <!--TODO add an if to check if there are no playlist. If not show button to create new playlists-->
         {% empty %}
-            <p> You haven't created a playlist yet! <a href = "">Create one</a></p><!--TODO"{% url 'playlistCreation'}"-->
+            <p> You haven't created a playlist yet! <a href = "{% url 'playlist_create' %}">Create one</a></p>
     {% endfor %}
 
     <a href="{% url 'index' %}">Go to song lists</a>
