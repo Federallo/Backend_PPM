@@ -14,5 +14,6 @@
             <p> You haven't created a playlist yet! <a href = "">Create one</a></p><!--TODO"{% url 'playlistCreation'}"-->
     {% endfor %}
 
-    <a href="{% url 'index' %}">Go to song list</a>
+    <a href="{% url 'index' %}">Go to song lists</a>
+    <a href="{% url 'logout' %}">Log Out</a>
 {% endblock %}
