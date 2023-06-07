@@ -14,6 +14,7 @@ class Songs(models.Model):
     
 class Playlist(models.Model):
     name = models.CharField(max_length=50)
+    description = models.CharField(max_length=50)
     songs = models.ManyToManyField(Songs)
     
     def __str__(self):
