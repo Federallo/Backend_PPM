@@ -1,6 +1,7 @@
 from django.views.generic import ListView, CreateView
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from .models import Songs, Playlist
 
 # Create your views here.
@@ -35,6 +36,7 @@ class PlaylistCreateView(CreateView):
     model = Playlist
     template_name = 'playlistCreation.html'
     fields = ('name', 'description')
+    success_url = reverse_lazy('profile')
     
     def form_valid(self, form):
         form.instance.user = self.request.user
