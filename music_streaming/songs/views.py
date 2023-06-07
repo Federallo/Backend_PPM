@@ -28,3 +28,7 @@ class PlaylistEditView(LoginRequiredMixin, View):
 class PlaylistDeleteView(LoginRequiredMixin, View):
     model = Playlist
     template_name = 'playlistDelete.html'
+
+class PlaylistCreateView(LoginRequiredMixin, View):
+    model = Playlist
+    template_name = 'playlistCreate.html'
