@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 class Songs(models.Model):
@@ -16,6 +17,7 @@ class Playlist(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=50)
     songs = models.ManyToManyField(Songs)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.name
