@@ -1,6 +1,7 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from .models import Songs
+from .models import Songs, Playlist
 
 # Create your views here.
 class SongIndexView(ListView):
@@ -11,3 +12,19 @@ class SongIndexView(ListView):
     def songlist(request):
         song_list = Songs.objects.all()
         return render(request, 'index.html', {'all_songs': song_list})
+    
+class PlaylistView(LoginRequiredMixin, ListView):
+    model = Playlist
+    template_name = 'playlist.html'
+
+class PlaylistDetailView(LoginRequiredMixin, View):
+    model = Playlist
+    template_name = 'playlistDetail.html'
+
+class PlaylistEditView(LoginRequiredMixin, View):
+    model = Playlist
+    template_name = 'playlistEdit.html'
+
+class PlaylistDeleteView(LoginRequiredMixin, View):
+    model = Playlist
+    template_name = 'playlistDelete.html'
