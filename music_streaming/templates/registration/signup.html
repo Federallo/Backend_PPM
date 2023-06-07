@@ -9,8 +9,8 @@
     <form action = "" method = "post">
         {% csrf_token %}
         {{ form|crispy }}
-        <input type = "submit" value = "Login"/>
+        <button type = "submit" class = "btn btn-success"> Sign Up </button>
     </form>
 
-    <p>Don't have an account? <a href = ""> Register</a></p>
+    <p>Already have an account? <a href = ""> Register</a></p>
 {%endblock content %}
