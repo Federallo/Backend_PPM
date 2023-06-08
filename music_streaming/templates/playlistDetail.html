@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Playlist: {{ playlists.name }}</h1>
+    <h1>Playlist: {{ object.name }}</h1>
     {% if songs %}
         <h2> Songs: </h2>
-        {% for song in songs %}
+        {% for song in songs %}<!--FIXME: maybe is object.songs-->
             <h3> {{ song.name }} </h3>
         {% endfor %}
     {% else%}

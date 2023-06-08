@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DeleteView, FormView, UpdateView
+from django.views.generic import ListView, DeleteView, FormView, UpdateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
@@ -37,8 +37,8 @@ def add_song_to_playlist(request, pk):
         playlist.objects.update(songs = item)
     return render(request, 'playlistEdit.html', {'playlist_add_songs': songs})
 
-class PlaylistDetailView(FormView):
-    form_class = PlaylistForm
+class PlaylistDetailView(DetailView):
+    model = Playlist
     template_name = 'playlistDetail.html'
 
 class PlaylistEditView(UpdateView):
