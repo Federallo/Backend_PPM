@@ -40,10 +40,13 @@ def add_song_to_playlist(request, pk):
 class PlaylistDetailView(DetailView):
     model = Playlist
     template_name = 'playlistDetail.html'
+    success_url = reverse_lazy('profile')
 
 class PlaylistEditView(UpdateView):
     model = Playlist
     template_name = 'playlistEdit.html'
+    fields = ('name', 'description', 'songs')
+    success_url = reverse_lazy('profile')
 
 class PlaylistDeleteView(DeleteView):
     model = Playlist
