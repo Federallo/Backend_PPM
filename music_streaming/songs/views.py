@@ -26,10 +26,8 @@ class PlaylistCreateView(FormView, LoginRequiredMixin):
         form.save()
         return super().form_valid(form)
     
+    
 @login_required    
-def playlist_view(request):
-    playlists = Playlist.object.filter(user=request.user)
-    return render(request, 'userProfile.html', {'playlists': playlists})
 
 class PlaylistDetailView(CreateView):
     model = Playlist

@@ -3,16 +3,15 @@
 
 {% block content %}
     <h1>Welcome back, {{ user.name }}.</h1>
-    <h2> Playlists: </h2>
-    {% for playlist in playlists %}<!--TODO-->
-        <h3> {{ playlist.name }} </h3>
-        {% for song in playlist.songs %}
-            <p> {{ song.name }} </p>
+    {% if playlists %}<!--TODO-->
+        <h2> Playlists: </h2>
+        {% for playlist in playlists %}
+            <h3> {{ playlist.name }} </h3>
         {% endfor %}
         <!--TODO add an if to check if there are no playlist. If not show button to create new playlists-->
-        {% empty %}
-            <p> You haven't created a playlist yet! <a href = "{% url 'playlist_create' %}">Create one</a></p>
-    {% endfor %}
+    {% else%}
+        <p> You haven't created a playlist yet! <a href = "{% url 'playlist_create' %}">Create one</a></p>
+    {% endif %}
 
     <a href="{% url 'index' %}">Go to song lists</a>
     <a href="{% url 'password_change' %}">Change Password</a>
