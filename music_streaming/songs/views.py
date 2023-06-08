@@ -1,4 +1,4 @@
-from django.views.generic import ListView, CreateView, FormView
+from django.views.generic import ListView, DeleteView, FormView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
@@ -28,16 +28,24 @@ class PlaylistCreateView(FormView, LoginRequiredMixin):
     
     
 @login_required    
+def add_song_to_playlist(request, pk):
+    songs = Songs.object.all()
+    playlist = Playlist.objects
+    if request.method == 'POST':
+        item = Songs.objects.get(id=pk)
+        playlist.song = item
+        playlist.objects.update(songs = item)
+    return render(request, 'playlistEdit.html', {'playlist_add_songs': songs})
 
-class PlaylistDetailView(CreateView):
-    model = Playlist
+class PlaylistDetailView(FormView):
+    form_class = PlaylistForm
     template_name = 'playlistDetail.html'
 
-class PlaylistEditView(CreateView):
+class PlaylistEditView(UpdateView):
     model = Playlist
     template_name = 'playlistEdit.html'
 
-class PlaylistDeleteView(CreateView):
+class PlaylistDeleteView(DeleteView):
     model = Playlist
     template_name = 'playlistDelete.html'
-
+    success_url = reverse_lazy('profile')

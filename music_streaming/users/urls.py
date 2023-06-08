@@ -1,6 +1,5 @@
 from django.urls import path
 from .views import SignUpView, profile_view
-#from songs.views import playlist_view
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [

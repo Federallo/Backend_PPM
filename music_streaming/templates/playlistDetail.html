@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Playlist: {{ playlists.name }}</h1>
+    {% if songs %}
+        <h2> Songs: </h2>
+        {% for song in songs %}
+            <h3> {{ song.name }} </h3>
+        {% endfor %}
+    {% else%}
+        <p> You haven't added any songs to this playlist yet! <a href = "">Add some</a></p>
+    {% endif %}
+
+    <a href="{% url 'index' %}">Go to song lists</a>
+    <a href="{% url 'profile' %}">Return to profile</a>
+{% endblock %}

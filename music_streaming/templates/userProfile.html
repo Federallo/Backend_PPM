@@ -7,8 +7,12 @@
         <h2> Playlists: </h2>
         {% for playlist in playlists %}
             <h3> {{ playlist.name }} </h3>
+            <a href= "{% url 'playlist_detail' %}">Details</a>
+            <form action="{% url 'playlist_delete' playlist.pk %}" method post>
+                {% csrf_token%}
+                <button type ="submit" class = "btn btn-danger">Delete playlist</button>
+            </form>
         {% endfor %}
-        <!--TODO add an if to check if there are no playlist. If not show button to create new playlists-->
     {% else%}
         <p> You haven't created a playlist yet! <a href = "{% url 'playlist_create' %}">Create one</a></p>
     {% endif %}
