@@ -25,17 +25,6 @@ class PlaylistCreateView(FormView, LoginRequiredMixin):
         form.instance.owner = self.request.user
         form.save()
         return super().form_valid(form)
-    
-    
-@login_required    
-def add_song_to_playlist(request, pk):
-    songs = Songs.object.all()
-    playlist = Playlist.objects
-    if request.method == 'POST':
-        item = Songs.objects.get(id=pk)
-        playlist.song = item
-        playlist.objects.update(songs = item)
-    return render(request, 'playlistEdit.html', {'playlist_add_songs': songs})
 
 class PlaylistDetailView(DetailView):
     model = Playlist
