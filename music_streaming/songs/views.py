@@ -45,7 +45,7 @@ class PlaylistDetailView(DetailView):
 class PlaylistEditView(UpdateView):
     model = Playlist
     template_name = 'playlistEdit.html'
-    fields = ('name', 'description', 'songs')
+    fields = ('name', 'description')
     success_url = reverse_lazy('profile')
 
 class PlaylistDeleteView(DeleteView):
