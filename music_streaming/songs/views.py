@@ -45,8 +45,19 @@ class PlaylistDetailView(DetailView):
 class PlaylistEditView(UpdateView):
     model = Playlist
     template_name = 'playlistEdit.html'
-    fields = ('name', 'description')
+    form_class = PlaylistForm
     success_url = reverse_lazy('profile')
+
+    def form_valid(self, form):
+        playlist = self.get_object()
+
+        form.instance.owner = self.request.user
+        form.save()
+
+        selected_songs = form.cleaned_data["songs"]
+        playlist.songs.set(selected_songs)
+        
+        return super().form_valid(form)
 
 class PlaylistDeleteView(DeleteView):
     model = Playlist

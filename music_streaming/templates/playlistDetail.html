@@ -5,7 +5,7 @@
     {% if object.songs %}
         <h2> Songs: </h2>
         {% for song in object.songs.all %}
-            <h3> {{ song.name }} </h3>
+            <h3> {{ song.title }} </h3>
         {% endfor %}
     {% else%}
         <p> You haven't added any songs to this playlist yet!</p>
