@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from rest_framework import serializers
 
 # Create your models here.
 class Songs(models.Model):
@@ -28,3 +29,8 @@ class Recommendation(models.Model):
 
     def __str__(self):
         return self.name
+    
+class SongSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Songs
+        fields = ('title', 'artist', 'album', 'genre', 'year', 'length')
