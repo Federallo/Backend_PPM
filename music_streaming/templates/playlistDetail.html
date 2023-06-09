@@ -2,13 +2,13 @@
 
 {% block content %}
     <h1>Playlist: {{ object.name }}</h1>
-    {% if songs %}
+    {% if object.songs %}
         <h2> Songs: </h2>
-        {% for song in songs %}<!--FIXME: maybe is object.songs-->
+        {% for song in object.songs.all %}
             <h3> {{ song.name }} </h3>
         {% endfor %}
     {% else%}
-        <p> You haven't added any songs to this playlist yet! <a href = "">Add some</a></p>
+        <p> You haven't added any songs to this playlist yet!</p>
     {% endif %}
 
     <a href="{% url 'index' %}">Go to song lists</a>
