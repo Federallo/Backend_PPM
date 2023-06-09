@@ -16,7 +16,7 @@ class Songs(models.Model):
 class Playlist(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=50)
-    songs = models.ManyToManyField(Songs, on_delete=models.CASCADE, blank=True, default=None, null=True)
+    songs = models.ManyToManyField(Songs, blank=True, default=None, null=True)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     
     def __str__(self):
