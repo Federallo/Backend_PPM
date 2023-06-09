@@ -7,4 +7,6 @@ urlpatterns = [
     path('<int:pk>/playlist_update/', views.PlaylistEditView.as_view(), name='playlist_edit'),
     path('<int:pk>/playlist_delete/', views.PlaylistDeleteView.as_view(), name='playlist_delete'),
     path('', views.SongIndexView.as_view(), name='index'),
+    path('', views.SongViewSet.as_view({'get': 'list'}), name='song_list'),
+    path('', views.SongViewSet.as_view({'get': 'retrieve'}), name='song_detail'),
 ]

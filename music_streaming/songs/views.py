@@ -3,19 +3,29 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from .models import Songs, Playlist
+from .models import Songs, Playlist, SongSerializer
 from .forms import PlaylistForm
+from rest_framework import viewsets
+from .filters import SongFilter
 
 # Create your views here.
+#Showing all songs
 class SongIndexView(ListView):
     model = Songs
     template_name = 'index.html'
     context_object_name = 'all_songs'
 
-    def songlist(request):
-        song_list = Songs.objects.all()
-        return render(request, 'index.html', {'all_songs': song_list})
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        song_filter = SongFilter(self.request.GET, queryset=queryset)
+        return song_filter.qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['song_filter'] = SongFilter(self.request.GET, queryset=self.get_queryset())
+        return context
     
+#All actions for playlists
 class PlaylistCreateView(FormView, LoginRequiredMixin):
     form_class = PlaylistForm
     template_name = 'playlistCreation.html'
@@ -52,3 +62,9 @@ class PlaylistDeleteView(DeleteView):
     model = Playlist
     template_name = 'playlistDelete.html'
     success_url = reverse_lazy('profile')
+
+#Filtering songs
+class SongViewSet(viewsets.ModelViewSet):
+    queryset = Songs.objects.all()
+    serializer_class = SongSerializer
+    filterset_class = SongFilter
