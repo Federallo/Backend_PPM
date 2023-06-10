@@ -1,8 +1,9 @@
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm
-from songs.models import Playlist
+from songs.models import Playlist, Recommendation
 from django.shortcuts import render
+from songs.views import recommend_songs
 
 # Create your views here.      
 class SignUpView(CreateView):
@@ -12,4 +13,15 @@ class SignUpView(CreateView):
 
 def profile_view(request):
     playlists = Playlist.objects.filter(owner=request.user)
-    return render(request, 'userProfile.html', {'user': request.user, 'playlists': playlists})
+    recommendation = recommend_songs(request.user)
+    if recommendation:
+        recommended_songs = recommendation.songs.all()
+    else:
+        recommended_songs = []
+
+    context = {
+        'user': request.user,
+        'playlists': playlists,
+        'recommendations': recommended_songs
+    }
+    return render(request, 'userProfile.html', context)

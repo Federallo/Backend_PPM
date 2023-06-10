@@ -1,13 +1,15 @@
 from django.views.generic import ListView, DeleteView, FormView, UpdateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from .models import Songs, Playlist, SongSerializer
+from .models import Songs, Playlist, SongSerializer, Recommendation
 from .forms import PlaylistForm
 from rest_framework import viewsets
 from .filters import SongFilter
+from django.db.models import Count
+from django.shortcuts import render
 
 # Create your views here.
-#Showing all songs
+#showing all songs
 class SongIndexView(ListView):
     model = Songs
     template_name = 'index.html'
@@ -23,7 +25,7 @@ class SongIndexView(ListView):
         context['song_filter'] = SongFilter(self.request.GET, queryset=self.get_queryset())
         return context
     
-#All actions for playlists
+#all actions for playlists
 class PlaylistCreateView(FormView, LoginRequiredMixin):
     form_class = PlaylistForm
     template_name = 'playlistCreation.html'
@@ -61,8 +63,43 @@ class PlaylistDeleteView(DeleteView):
     template_name = 'playlistDelete.html'
     success_url = reverse_lazy('profile')
 
-#Filtering songs
+#filtering songs
 class SongViewSet(viewsets.ModelViewSet):
     queryset = Songs.objects.all()
     serializer_class = SongSerializer
     filterset_class = SongFilter
+
+#creating a recommendation algorithm and its view
+def recommend_songs(user):
+    # Get the user's most listened genre
+    most_listened_genre = (
+        Songs.objects.filter(playlist__owner=user)
+        .values('genre')
+        .annotate(count=Count('genre'))
+        .order_by('-count')
+        .first()
+    )
+
+    if most_listened_genre:
+        # excluding songs from the user's playlists
+        user_playlists = Playlist.objects.filter(owner=user)
+        excluded_songs = Songs.objects.filter(playlist__in=user_playlists)
+
+        # getting recommended songs based on the most listened genre
+        subquery = Songs.objects.filter(genre=most_listened_genre['genre'])
+        recommended_songs = (
+            Songs.objects.exclude(id__in=excluded_songs)
+            .filter(genre=most_listened_genre['genre'], id__in=subquery)
+            .exclude(playlist__owner=user)
+            .order_by('?')[:10]  # randomizing the order of recommended songs and limiting the number of recommended songs to 10
+        )
+
+        # creating a new recommendation object to store the recommended songs
+        recommendation = Recommendation.objects.create(name="Recommended Songs")
+
+        # adding the recommended songs to the recommendation object
+        recommendation.songs.set(recommended_songs)
+
+        return recommendation
+    else:
+        return None
