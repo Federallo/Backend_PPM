@@ -7,8 +7,26 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     </head>
-    <header class = "p-3 mb-3" style = "background-color: dimgray;">
-            
+    <header style = "background-color: dimgray;">
+            <nav class = "navbar navbar-expand-lg">
+                <div class = "container-fluid">
+                <a class = "mavbar-brand" href = "{% url 'index' %}" style="color: white; text-decoration: none;">Music Streaming</a>
+                    {% if user.is_authenticated %}
+                        <ul class = "navbar-nav me-4 mb-2 mb-lg-0">
+                            <li class = "nav-item">
+                                <a class = "nav-link active" aria-current = "page" href = "{% url 'profile' %}" style="color: white; text-decoration: none;">Profile</a>
+                            </li>
+                            <li class = "nav-item">
+                                <a class = "nav-link active" aria-current = "page" href = "{% url 'logout' %}" style="color: white; text-decoration: none;">Log Out</a>
+                            </li>
+                            <li class = "nav-item">
+                                <a class = "nav-link active" aria-current = "page" href = "" style="color: white; text-decoration: none;">{{ user.name }}</a>
+                            </li>
+                        </ul> 
+                    {% endif %}
+                </div>
+               
+            </nav>
     </header>
     <body>
         

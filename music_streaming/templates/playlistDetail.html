@@ -31,8 +31,5 @@
     {% else%}
         <p> You haven't added any songs to this playlist yet!</p>
     {% endif %}
-
-    <a href="{% url 'index' %}">Go to song lists</a>
-    <a href="{% url 'profile' %}">Return to profile</a>
     <a href="{% url 'playlist_share' object.pk %}">Share</a>
 {% endblock %}
