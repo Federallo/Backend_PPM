@@ -1,7 +1,7 @@
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm
-from songs.models import Playlist, Recommendation
+from songs.models import Playlist
 from django.shortcuts import render
 from songs.views import recommend_songs
 
