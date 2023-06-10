@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "django_filters",
     "rest_framework",#for apis, especially for filtering
-    "recommends",#for recommendations
     #local apps
     'songs',
     'users',
