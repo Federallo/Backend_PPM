@@ -4,36 +4,18 @@
 
 {% block content %}
 <h1>Song List:</h1>
-<form method="GET" action="{% url 'song_list' %}">
-    <div class="form-row">
-      <div class="col-md-3">
-        <input type="text" name="title" placeholder="Title" value="{{ request.GET.title }}">
-      </div>
-      <div class="col-md-3">
-        <input type="text" name="artist" placeholder="Artist" value="{{ request.GET.artist }}">
-      </div>
-      <div class="col-md-3">
-        <input type="text" name="album" placeholder="Album" value="{{ request.GET.album }}">
-      </div>
-      <div class="col-md-3">
-        <input type="text" name="genre" placeholder="Genre" value="{{ request.GET.genre }}">
-      </div>
-    </div>
-    <div class="form-row mt-2">
-      <div class="col-md-3">
-        <input type="number" name="year" placeholder="Year" value="{{ request.GET.year }}">
-      </div>
-      <div class="col-md-3">
-        <input type="text" name="length__gte" placeholder="Min Length" value="{{ request.GET.length__gte }}">
-      </div>
-      <div class="col-md-3">
-        <input type="text" name="length__lte" placeholder="Max Length" value="{{ request.GET.length__lte }}">
-      </div>
-      <div class="col-md-3">
-        <button type="submit" class="btn btn-primary">Filter</button>
-      </div>
-    </div>
-  </form>
+<div class = "container-fluid">
+  <form method="GET" action="{% url 'song_list' %}">
+      <input type="text" name="title" placeholder="Title" value="{{ request.GET.title }}">
+      <input type="text" name="artist" placeholder="Artist" value="{{ request.GET.artist }}">
+      <input type="text" name="album" placeholder="Album" value="{{ request.GET.album }}">
+      <input type="text" name="genre" placeholder="Genre" value="{{ request.GET.genre }}">
+      <input type="number" name="year" placeholder="Year" value="{{ request.GET.year }}">
+      <input type="text" name="length__gte" placeholder="Min Length" value="{{ request.GET.length__gte }}">
+      <input type="text" name="length__lte" placeholder="Max Length" value="{{ request.GET.length__lte }}">
+      <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+</div>
 {% if all_songs %}
     <div class = "table-responsive">
         <table class = "table talbe-striped">

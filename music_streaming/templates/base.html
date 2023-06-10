@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style = "background-image: linear-gradient(black, red);">
+<html>
     {% load static %}
     <head>
         <title>Music Streaming</title>
@@ -10,7 +10,7 @@
     <header style = "background-color: dimgray;">
             <nav class = "navbar navbar-expand-lg">
                 <div class = "container-fluid">
-                <a class = "mavbar-brand" href = "{% url 'index' %}" style="color: white; text-decoration: none;">Music Streaming</a>
+                <a class = "mavbar-brand fw-bold" href = "{% url 'index' %}" style="color: white; text-decoration: none;">Music Streaming</a>
                     {% if user.is_authenticated %}
                         <ul class = "navbar-nav me-4 mb-2 mb-lg-0">
                             <li class = "nav-item">
@@ -29,7 +29,6 @@
             </nav>
     </header>
     <body>
-        
         {% block content %}{% endblock content %}
     </body>
 </html>
