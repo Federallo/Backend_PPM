@@ -4,9 +4,30 @@
     <h1>Playlist: {{ object.name }}</h1>
     {% if object.songs %}
         <h2> Songs: </h2>
-        {% for song in object.songs.all %}
-            <h3> {{ song.title }} </h3>
-        {% endfor %}
+        <div class = "table-responsive">
+            <table class = "table table-striped">
+                <thead>
+                    <tr>
+                        <th>Song Name</th>
+                        <th>Artist</th>
+                        <th>Album</th>
+                        <th>Genre</th>
+                        <th>Duration (in seconds)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for song in object.songs.all %}
+                        <tr>
+                            <td>{{ song.title }}</td>
+                            <td>{{ song.artist }}</td>
+                            <td>{{ song.album }}</td>
+                            <td>{{ song.genre }}</td>
+                            <td>{{ song.length }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% else%}
         <p> You haven't added any songs to this playlist yet!</p>
     {% endif %}
