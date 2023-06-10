@@ -6,7 +6,7 @@ from .forms import PlaylistForm
 from rest_framework import viewsets
 from .filters import SongFilter
 from django.db.models import Count
-from django.shortcuts import render
+from django.http import HttpResponse
 
 # Create your views here.
 #showing all songs
@@ -103,3 +103,8 @@ def recommend_songs(user):
         return recommendation
     else:
         return None
+    
+#sharing a playlist
+def share_playlist(request, pk):
+    playlist_link = request.build_absolute_uri(reverse_lazy('playlist_detail', args=[pk]))
+    return HttpResponse(f"Share this playlist: <a href='{playlist_link}'>{playlist_link}</a>")
