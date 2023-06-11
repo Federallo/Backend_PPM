@@ -82,7 +82,6 @@ packaging==21.3
 paramiko==2.9.3
 pathvalidate==2.5.2
 pexpect==4.8.0
-pikepdf==5.0.1+dfsg
 Pillow==9.0.1
 pipreqs==0.4.13
 ply==3.11
@@ -107,9 +106,7 @@ PyQt5-sip==12.9.1
 PyQtWebEngine==5.15.5
 pyRFC3339==1.1
 pyrsistent==0.18.1
-python-apt==2.4.0+ubuntu1
 python-dateutil==2.8.2
-python-debian===0.1.43ubuntu1
 pythran==0.10.0
 pytz==2022.1
 pyxdg==0.27
