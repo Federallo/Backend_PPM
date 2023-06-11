@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'music_streaming.urls'
@@ -139,3 +140,8 @@ LOGOUT_REDIRECT_URL = "index"
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR/ 'static']
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
