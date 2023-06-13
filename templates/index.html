@@ -3,9 +3,9 @@
 {% block title %} Song List {% endblock title %}
 
 {% block content %}
-<h1>Song List:</h1>
+<h1 style="color: white;">Song List:</h1>
 <div class = "container-fluid">
-  <form method="GET" action="{% url 'song_list' %}">
+    <form method="GET" action="{% url 'song_list' %}">
       <input type="text" name="title" placeholder="Title" value="{{ request.GET.title }}">
       <input type="text" name="artist" placeholder="Artist" value="{{ request.GET.artist }}">
       <input type="text" name="album" placeholder="Album" value="{{ request.GET.album }}">
@@ -13,12 +13,12 @@
       <input type="number" name="year" placeholder="Year" value="{{ request.GET.year }}">
       <input type="text" name="length__gte" placeholder="Min Length" value="{{ request.GET.length__gte }}">
       <input type="text" name="length__lte" placeholder="Max Length" value="{{ request.GET.length__lte }}">
-      <button type="submit" class="btn btn-primary">Filter</button>
+      <button type="submit" class="btn btn-secondary">Filter</button>
     </form>
 </div>
 {% if all_songs %}
     <div class = "table-responsive">
-        <table class = "table talbe-striped">
+        <table class = "table talbe-striped table-dark">
             <thead>
                 <tr>
                     <th>Title</th>

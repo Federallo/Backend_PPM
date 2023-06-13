@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Playlist: {{ object.name }}</h1>
+    <h1 style = "color: white;">Playlist: {{ object.name }}</h1>
     {% if object.songs %}
-        <h2> Songs: </h2>
+        <h2 style = "color: white;"> Songs: </h2>
         <div class = "table-responsive">
-            <table class = "table table-striped">
+            <table class = "table table-striped table-dark">
                 <thead>
                     <tr>
                         <th>Song Name</th>
@@ -29,7 +29,7 @@
             </table>
         </div>
     {% else%}
-        <p> You haven't added any songs to this playlist yet!</p>
+        <p style = "color: white;"> You haven't added any songs to this playlist yet!</p>
     {% endif %}
     <a href="{% url 'playlist_share' object.pk %}">Share</a>
 {% endblock %}
