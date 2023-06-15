@@ -6,7 +6,8 @@ from .forms import PlaylistForm
 from rest_framework import viewsets
 from .filters import SongFilter
 from django.db.models import Count
-from django.http import HttpResponse
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 #showing all songs
@@ -26,7 +27,7 @@ class SongIndexView(ListView):
         return context
     
 #all actions for playlists
-class PlaylistCreateView(FormView, LoginRequiredMixin):
+class PlaylistCreateView(LoginRequiredMixin, FormView):
     form_class = PlaylistForm
     template_name = 'playlistCreation.html'
     success_url = reverse_lazy('profile')
@@ -36,7 +37,7 @@ class PlaylistCreateView(FormView, LoginRequiredMixin):
         form.save()
         return super().form_valid(form)
 
-class PlaylistDetailView(DetailView):
+class PlaylistDetailView(LoginRequiredMixin, DetailView):
     model = Playlist
     template_name = 'playlistDetail.html'
     success_url = reverse_lazy('profile')
@@ -105,6 +106,7 @@ def recommend_songs(user):
         return None
     
 #sharing a playlist
+@login_required
 def share_playlist(request, pk):
     playlist_link = request.build_absolute_uri(reverse_lazy('playlist_detail', args=[pk]))
-    return HttpResponse(f"Share this playlist: <a href='{playlist_link}'>{playlist_link}</a>")
+    return render(request, 'playlist_share.html', {'playlist_link': playlist_link})

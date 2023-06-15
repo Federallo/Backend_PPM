@@ -31,5 +31,5 @@
     {% else%}
         <p style = "color: white;"> You haven't added any songs to this playlist yet!</p>
     {% endif %}
-    <a href="{% url 'playlist_share' object.pk %}">Share</a>
+    <a href="{% url 'share_playlist' object.pk %}">Share</a>
 {% endblock %}
