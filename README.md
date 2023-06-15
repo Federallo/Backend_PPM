@@ -17,7 +17,7 @@ Implement search and filtering functionalities.<br />
 
 ### **Views**
 - User customization (login, change password, sign up | using django built-in features).
-- Playlist customization (create, edit, add songs, remove songs, delete | using django built-in features).
+- Playlist customization (create, edit, add songs, remove songs, delete, share (only for logged users) | using django built-in features).
 - Playlist sharing by generating a url, using HttpResponse, which every user can open.
 - Song index, with filtering functionalities (which also features search).
 - Recommendations based on user's playlists: the algorithm keeps tracking users' genres inside their playlists, chooses which genres appears the most, and gives a list of 10 recommended songs.
